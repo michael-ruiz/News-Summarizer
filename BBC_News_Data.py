@@ -99,7 +99,7 @@ class BBCNewsDataset(Dataset):
         
         summary_tokens = self.tokenizer(
             summary,
-            max_length=self.max_length // 4,  # Shorter max_length for summaries
+            max_length=self.max_length // 4,
             padding='max_length',
             truncation=True,
             return_tensors='pt'
@@ -111,12 +111,3 @@ class BBCNewsDataset(Dataset):
             'labels': summary_tokens['input_ids'].squeeze(),
             'summary_attention_mask': summary_tokens['attention_mask'].squeeze()
         }
-
-# Example usage
-if __name__ == "__main__":
-    base_path = "data"
-    dataset = BBCNewsDataset(base_path)
-    dataloader = DataLoader(dataset, batch_size=4, shuffle=True)
-    
-    # Print
-    print(f"Total number of articles: {len(dataset)}")
